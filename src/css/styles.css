@@ -57,7 +57,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.2;
   color: #6f6f6f; }
 
 a,
@@ -68,26 +68,29 @@ a:visited {
   color: #c0c0c0; }
 
 h1 {
-  font-size: 1.7em; }
+  font-size: 1.7rem; }
   h1::first-letter {
     text-transform: capitalize; }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin: 2px; }
   h2::first-letter {
     text-transform: capitalize; }
 
 h3 {
-  font-size: 1em; }
+  font-size: 1rem; }
   h3::first-letter {
     text-transform: capitalize; }
 
 h4 {
-  font-size: 0.7em;
+  font-size: 0.7rem;
   font-weight: 600; }
   h4::first-letter {
     text-transform: capitalize; }
+
+.smallText {
+  font-size: 0.7rem; }
 
 .text-bold {
   font-weight: 600; }
@@ -128,31 +131,37 @@ h4 {
 .cal__heading {
   display: flex;
   justify-content: center;
-  width: 25%;
+  align-items: center;
+  width: 10%;
+  height: 100%;
   flex: 1 1 auto;
   padding: 5px;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #adadad;
+  color: white; }
 
-.cal__heading--larger {
+.cal__heading--inline {
+  display: inline-block; }
+
+.cal__heading--item::first-letter {
+  text-transform: capitalize; }
+
+.cal__heading__internal_container {
   flex: 2 1 auto;
   width: 50%;
   justify-content: space-around;
-  align-items: flex-start; }
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column; }
+
+.cal__heading--larger {
+  width: 100%; }
 
 #languageSelectorContainer {
   padding: 0 5px; }
 
-.github-mention {
-  background-color: #edf3fe;
-  border-style: solid;
-  border-radius: 5px;
-  border-color: blue;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  width: 30%; }
-
 .cal__heading--box {
+  width: 100%;
   text-align: center; }
 
 .cal__week {
@@ -186,7 +195,6 @@ h4 {
   padding: 0.5%; }
 
 .cal__days__spacer, .cal__days__day, .cal__days__spacer--end {
-  padding: 1em;
   margin: 10px 1% 0 0;
   display: flex;
   flex: 1 1 auto;
@@ -237,12 +245,6 @@ h4 {
 .cal__week__day {
   order: 1; }
 
-.cal__week__day--first {
-  order: 0; }
-
-.cal__week__day--last {
-  order: 2; }
-
 .today__container {
   display: flex;
   flex: 1 1 auto;
@@ -292,18 +294,3 @@ h4 {
   display: flex;
   justify-content: left;
   align-items: center; }
-
-.clockdate__digit__container--first {
-  order: 1; }
-
-.clockdate__digit__container--second {
-  order: 2; }
-
-.clockdate__digit__container--third {
-  order: 3; }
-
-.clockdate__digit__container--fourth {
-  order: 4; }
-
-.clockdate__digit__container--fifth {
-  order: 5; }

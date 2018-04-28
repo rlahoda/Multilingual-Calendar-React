@@ -23,7 +23,7 @@ class Calendar extends React.Component {
 
     },
     language: {
-      "english": {
+      "English": {
         "month": "month",
         "currenttime": "current time",
         "today": "today",
@@ -49,6 +49,9 @@ class Calendar extends React.Component {
         "ordinals": ["zero", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentyeth", "twenty-first", "twenty-second", "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth", "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth", "thirty-first"]
       },
       "languageSelectorItems": {
+        0: "english"
+      },
+      "languageSelectorItemsLabels": {
         0: "english"
       },
       "selectedLanguage": "english",
@@ -142,6 +145,7 @@ class Calendar extends React.Component {
     .then(function(response) {
       if (response.status >= 400) {
         that.addLanguageOptions();
+        that.addLanguageOptionsLabels();
         throw new Error("Bad response from server");
       }
       return response.json();
@@ -149,6 +153,7 @@ class Calendar extends React.Component {
     .then(function(data) {
       that.setState({ language: data });
       that.addLanguageOptions();
+      that.addLanguageOptionsLabels();
     });
     this.intervalID = setInterval(
       () => this.masterDate(),
@@ -166,6 +171,15 @@ class Calendar extends React.Component {
     for (let i in this.state.language) {
     languageSelectorItems.push(i)
     this.setState({ languageSelectorItems })
+    // console.log(languageSelectorItems);
+  }}
+  addLanguageOptionsLabels = () => {
+    let languageSelectorItemsLabels = [];
+    for (let i in this.state.language) {
+    let upperCaseText = i.charAt(0).toUpperCase() + i.substr(1);
+
+    languageSelectorItemsLabels.push(upperCaseText)
+    this.setState({ languageSelectorItemsLabels })
     // console.log(languageSelectorItems);
   }
 }
@@ -217,6 +231,7 @@ class Calendar extends React.Component {
         language={currentLanguage}
         today={this.state.today}
         languageSelectorItems={this.state.languageSelectorItems}
+        languageSelectorItemsLabels={this.state.languageSelectorItemsLabels}
         changeLanguage={this.changeLanguage}
         weekStartDay={this.weekStartDay}
         weekStart={this.state.weekStart}

@@ -12,6 +12,7 @@ class Cal extends React.Component {
         dateOrderSwap={this.props.dateOrderSwap}
         language={this.props.language}
         languageSelectorItems={this.props.languageSelectorItems}
+        languageSelectorItemsLabels={this.props.languageSelectorItemsLabels}
         changeLanguage={this.props.changeLanguage}
         month={this.props.today.monthCurrent}
         weekStartDay={this.props.weekStartDay}

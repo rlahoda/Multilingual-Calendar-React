@@ -44,7 +44,6 @@ class DateContainer extends React.Component {
         />
     </div>
     )
-
   }
 }
 
