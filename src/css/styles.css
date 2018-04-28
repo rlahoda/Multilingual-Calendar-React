@@ -1,0 +1,309 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #6f6f6f; }
+
+a,
+a:visited {
+  color: #6f6f6f; }
+
+.light-grey {
+  color: #c0c0c0; }
+
+h1 {
+  font-size: 1.7em; }
+  h1::first-letter {
+    text-transform: capitalize; }
+
+h2 {
+  font-size: 1.5em;
+  margin: 2px; }
+  h2::first-letter {
+    text-transform: capitalize; }
+
+h3 {
+  font-size: 1em; }
+  h3::first-letter {
+    text-transform: capitalize; }
+
+h4 {
+  font-size: 0.7em;
+  font-weight: 600; }
+  h4::first-letter {
+    text-transform: capitalize; }
+
+.text-bold {
+  font-weight: 600; }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  flex-wrap: wrap; }
+  @media only screen and (min-width: 1060px) {
+    .container {
+      min-height: 100vh; } }
+
+/* calendar */
+.cal__container {
+  flex: 1 1 auto;
+  width: 98%;
+  margin: 5px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c0c0c0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; }
+  @media only screen and (min-width: 1060px) {
+    .cal__container {
+      width: 60%; } }
+
+.cal__heading__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ededed; }
+
+.cal__heading {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  flex: 1 1 auto;
+  padding: 5px;
+  overflow: hidden; }
+
+.cal__heading--larger {
+  flex: 2 1 auto;
+  width: 50%;
+  justify-content: space-around;
+  align-items: flex-start; }
+
+#languageSelectorContainer {
+  padding: 0 5px; }
+
+.github-mention {
+  background-color: #edf3fe;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: blue;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 30%; }
+
+.cal__heading--box {
+  text-align: center; }
+
+.cal__week {
+  display: flex;
+  justify-content: center;
+  padding-right: 10px; }
+
+.cal__week__day {
+  margin: 10px;
+  flex: 1 1 auto;
+  width: 12%;
+  display: flex;
+  justify-content: center; }
+
+.cal__week__day--text {
+  font-size: 0;
+  width: 0; }
+  .cal__week__day--text::first-letter {
+    font-size: 20px; }
+  @media only screen and (min-width: 600px) {
+    .cal__week__day--text {
+      font-size: inherit;
+      width: auto; }
+      .cal__week__day--text::first-letter {
+        font-size: inherit; } }
+
+.cal__days__grid {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 0.5%; }
+
+.cal__days__spacer, .cal__days__day, .cal__days__spacer--end {
+  padding: 1em;
+  margin: 10px 1% 0 0;
+  display: flex;
+  flex: 1 1 auto;
+  width: 12%;
+  box-shadow: 2px 2px 5px 0 transparent;
+  order: 0; }
+
+.cal__days__day {
+  background-color: #dff8fd;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c3f3fd;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
+  order: 1;
+  text-align: center; }
+
+.cal__days__spacer--end {
+  order: 2; }
+
+.cal__days__day--text {
+  visibility: hidden;
+  height: 0; }
+  @media only screen and (min-width: 600px) {
+    .cal__days__day--text {
+      visibility: visible;
+      height: auto; } }
+
+.cal__days__day--ordinal {
+  visibility: hidden;
+  height: 0; }
+  @media only screen and (min-width: 600px) {
+    .cal__days__day--ordinal {
+      visibility: visible;
+      height: auto; } }
+
+.cal__days__day--weekend {
+  background-color: #fefde6;
+  border-color: #fefabd; }
+
+.cal__days__day--today {
+  background-color: #fddfed;
+  border-color: #febddb; }
+
+.cal__week__day {
+  order: 1; }
+
+.cal__week__day--first {
+  order: 0; }
+
+.cal__week__day--last {
+  order: 2; }
+
+.today__container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  width: 98%;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c0c0c0; }
+  @media only screen and (min-width: 1060px) {
+    .today__container {
+      flex-direction: column;
+      width: 10%;
+      flex-wrap: nowrap;
+      align-items: center; } }
+
+.clockdate__container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 55%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center; }
+  @media only screen and (min-width: 600px) {
+    .clockdate__container {
+      width: 45%; } }
+  @media only screen and (min-width: 1060px) {
+    .clockdate__container {
+      width: 100%; } }
+
+.clockdate__string__container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  min-height: 20%; }
+
+.clockdate__digit__container {
+  flex: 1 1 auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: left;
+  align-items: center; }
+
+.clockdate__digit__container--first {
+  order: 1; }
+
+.clockdate__digit__container--second {
+  order: 2; }
+
+.clockdate__digit__container--third {
+  order: 3; }
+
+.clockdate__digit__container--fourth {
+  order: 4; }
+
+.clockdate__digit__container--fifth {
+  order: 5; }
