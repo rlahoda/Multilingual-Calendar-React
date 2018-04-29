@@ -2,7 +2,7 @@
 
 *This is an updated version of my previous project which is essentially the same calendar built with plain Javascript. It can be found at [https://github.com/rlahoda/multilingual-calendar](https://github.com/rlahoda/multilingual-calendar)*
 
-** If you are interested in adding languages to this project, see the link above for directions on how to submit a pull request for additional languages. **
+**If you are interested in adding languages to this project, see the link above for directions on how to submit a pull request for additional languages.**
 
 To try to help make this make more sense to someone who isn't familiar with React, I included a lot of notes throughout the files to explain what I was doing and why.
 
