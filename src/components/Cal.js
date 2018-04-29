@@ -5,7 +5,7 @@ import CalMonthContainer from './CalMonthContainer';
 
 class Cal extends React.Component {
 
-  render() {
+  render() {//This forms the general structure of the page. It splits the information from the props into where it all needs to go for the clock with the dates on the side and the calendar grid and the header with the selectors for the various options
     return (
     <div className="cal__container">
       <CalHeader
