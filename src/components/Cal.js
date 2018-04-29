@@ -29,7 +29,6 @@ class Cal extends React.Component {
       />
     </div>
     )
-
   }
 }
 

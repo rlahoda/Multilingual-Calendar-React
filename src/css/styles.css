@@ -204,7 +204,7 @@ h4 {
 
 .cal__days__day {
   background-color: #dff8fd;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
@@ -213,7 +213,8 @@ h4 {
   border-color: #c3f3fd;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
   order: 1;
-  text-align: center; }
+  text-align: center;
+  padding: 20px; }
 
 .cal__days__spacer--end {
   order: 2; }
@@ -293,4 +294,5 @@ h4 {
   flex-direction: column;
   display: flex;
   justify-content: left;
-  align-items: center; }
+  align-items: center;
+  width: 30%; }

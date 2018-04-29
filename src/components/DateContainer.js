@@ -3,7 +3,7 @@ import React from 'react';
 import TextDigitContainer from './TextDigitContainer';
 
 class DateContainer extends React.Component {
-
+//this just puts together the four sections for the current time and three dates, passing along the necessary information for each of them
   render() {
     return (
     <div className="today__container">

@@ -60,190 +60,185 @@ class Calendar extends React.Component {
   };
 
   //Create current date
+masterDate() {
+  //take a copy of state
+  let today = {
+    ...this.state.today
+  };
+  //create the date for today, tomorrow, and yesterday
+  const todayDate = new Date();
+  let tomorrowDate = new Date();
+  tomorrowDate.setDate(todayDate.getDate() + 1);
+  let yesterdayDate = new Date();
+  yesterdayDate.setDate(todayDate.getDate() - 1);
+  //get values for the hours, minutes, seconds, for today and day, month, year for yesterday, today, and tomorrow
+  let hourValue = todayDate.getHours();
+  let minuteValue = todayDate.getMinutes();
+  let secondValue = todayDate.getSeconds();
+  let currentDayNumber = todayDate.getDate();
+  let lastDayNumber = yesterdayDate.getDate();
+  let nextDayNumber = tomorrowDate.getDate();
 
-  masterDate(){
-    let today = { ...this.state.today};
-    // console.log(today);
-    const todayDate = new Date();
-    let tomorrowDate = new Date();
-    tomorrowDate.setDate(todayDate.getDate()+1);
-    let yesterdayDate = new Date();
-    yesterdayDate.setDate(todayDate.getDate()-1);
-
-    let hourValue = todayDate.getHours();
-    let minuteValue = todayDate.getMinutes();
-    let secondValue = todayDate.getSeconds();
-    let currentDayNumber = todayDate.getDate();
-    let lastDayNumber = yesterdayDate.getDate();
-    let nextDayNumber = tomorrowDate.getDate();
-    let currentMonthNumber = todayDate.getMonth()+1;
-    let lastMonthNumber = yesterdayDate.getMonth()+1;
-    let nextMonthNumber = tomorrowDate.getMonth()+1;
-    let thisYearNumber = todayDate.getFullYear();
-    let lastYearNumber = yesterdayDate.getFullYear();
-    let nextYearNumber = tomorrowDate.getFullYear();
-    let monthdaysAmt = this.monthDaysCalc(4);
-    let startDayDate = new Date(thisYearNumber, currentMonthNumber, 1);
-    let startDay = startDayDate.getDay()-2;
-
-    today.hour = hourValue;
-    today.minute = minuteValue;
-    today.second = secondValue;
-    today.dayCurrent = currentDayNumber;
-    today.monthCurrent = currentMonthNumber;
-    today.yearCurrent = thisYearNumber;
-    today.dayPrevious = lastDayNumber
-    today.monthPrevious = lastMonthNumber;
-    today.yearPrevious = lastYearNumber;
-    today.dayNext = nextDayNumber;
-    today.monthNext = nextMonthNumber;
-    today.yearNext = nextYearNumber;
-    today.monthDays = monthdaysAmt;
-    today.startDay = startDay;
-
-    this.setState({ today })
-    // console.log(today);
-  }
-
-  // componentDidMount(){
-  //   this.masterDate();
-  // }
-  //Figure out months in the year
-  leapYear = (year) => {
-      if (year % 4 === 0) // basic rule
-          return true // is leap year
-          /* else */ // else not needed when statement is "return"
-      return false // is not leap year
-  }
-
-  monthDaysCalc = (month, year) => {
-    var ar = new Array(12)
-    ar[0] = 31 // January
-    ar[1] = (year % 4 === 0) ? 29 : 28 // February
-    ar[2] = 31 // March
-    ar[3] = 30 // April
-    ar[4] = 31 // May
-    ar[5] = 30 // June
-    ar[6] = 31 // July
-    ar[7] = 31 // August
-    ar[8] = 30 // September
-    ar[9] = 31 // October
-    ar[10] = 30 // November
-    ar[11] = 31 // December
-
-    // return number of days in the specified month (parameter)
-    return ar[month]
-  }
+  let currentMonthNumber = todayDate.getMonth() + 1;//in js months are counted starting at 0 = January, so this + 1 compensates to bring it in alignment with what we write
+  let lastMonthNumber = yesterdayDate.getMonth() + 1;
+  let nextMonthNumber = tomorrowDate.getMonth() + 1;
+  let thisYearNumber = todayDate.getFullYear();
+  let lastYearNumber = yesterdayDate.getFullYear();
+  let nextYearNumber = tomorrowDate.getFullYear();
+  let monthdaysAmt = this.monthDaysCalc(currentMonthNumber - 1);//the - 1 compensates back to starting the count from 0 to align with the monthDaysCalc function
+  let startDayDate = new Date(thisYearNumber, currentMonthNumber, 1);
+  let startDay = startDayDate.getDay() - 2;
+  //add all the values to the copy of state
+  today.hour = hourValue;
+  today.minute = minuteValue;
+  today.second = secondValue;
+  today.dayCurrent = currentDayNumber;
+  today.monthCurrent = currentMonthNumber;
+  today.yearCurrent = thisYearNumber;
+  today.dayPrevious = lastDayNumber
+  today.monthPrevious = lastMonthNumber;
+  today.yearPrevious = lastYearNumber;
+  today.dayNext = nextDayNumber;
+  today.monthNext = nextMonthNumber;
+  today.yearNext = nextYearNumber;
+  today.monthDays = monthdaysAmt;
+  today.startDay = startDay;
+  //set state to the new values
+  this.setState({today})
+  // console.log(today);
+}
 
 
-  //Retrieve languages from Github
-  componentDidMount() {
-    var that = this;
-    var url = 'https://raw.githubusercontent.com/rlahoda/multilingual-calendar/master/languages.json'
+//Figure out months in the year
+monthDaysCalc = (month, year) => {
+  var ar = new Array(12)
+  ar[0] = 31 // January
+  ar[1] = (year % 4 === 0)
+    ? 29
+    : 28 // February, if/then test for if it's a leap year or not and changes the number of days in Feb accordingly
+  ar[2] = 31 // March
+  ar[3] = 30 // April
+  ar[4] = 31 // May
+  ar[5] = 30 // June
+  ar[6] = 31 // July
+  ar[7] = 31 // August
+  ar[8] = 30 // September
+  ar[9] = 31 // October
+  ar[10] = 30 // November
+  ar[11] = 31 // December
 
-    fetch(url)
-    .then(function(response) {
-      if (response.status >= 400) {
-        that.addLanguageOptions();
-        that.addLanguageOptionsLabels();
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    })
-    .then(function(data) {
-      that.setState({ language: data });
+  // return number of days in the specified month (parameter)
+  return ar[month]
+}
+
+//Retrieve languages from Github
+componentDidMount() {
+  var that = this;
+  var url = 'https://raw.githubusercontent.com/rlahoda/multilingual-calendar/master/languages.json'
+
+  fetch(url).then(function(response) {
+    if (response.status >= 400) {//if the ajax call fails, it'll send an error and add the language selector options for the basic English that's in state by default
       that.addLanguageOptions();
       that.addLanguageOptionsLabels();
-    });
-    this.intervalID = setInterval(
-      () => this.masterDate(),
-      1000
-    );
-  }
+      throw new Error("Bad response from server");
+    }
+    return response.json();
+  }).then(function(data) {//if the ajax call is successful, it'll put the data from the json file into state under language then run the funtions to add the language selectors based on the languages available
+    that.setState({language: data});
+    that.addLanguageOptions();
+    that.addLanguageOptionsLabels();
+  });
+  this.intervalID = setInterval(() => this.masterDate(), //this calls the masterDate function that starts the timer and continues to call is ever 1 second
+      1000);
+}
 
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
+componentWillUnmount() {
+  clearInterval(this.intervalID);
+}
 
-  //create language options based on available languages
-  addLanguageOptions = () => {
-    let languageSelectorItems = [];
-    for (let i in this.state.language) {
-    languageSelectorItems.push(i)
-    this.setState({ languageSelectorItems })
+//create language options based on available languages
+addLanguageOptions = () => {
+  let languageSelectorItems = [];//create an empty array to put all the options in
+  for (let i in this.state.language) {//loop through the availale languages in state and for each of them it'll pull in the name of the languages available
+    languageSelectorItems.push(i) //add the language name to the empty array we created above
+    this.setState({languageSelectorItems})//add the array to state
     // console.log(languageSelectorItems);
-  }}
-  addLanguageOptionsLabels = () => {
-    let languageSelectorItemsLabels = [];
-    for (let i in this.state.language) {
+  }
+}
+addLanguageOptionsLabels = () => {//this is pretty much identical to the above function except it first pulls the first letter of the language and capitalizes it before putting it into the empty array
+  let languageSelectorItemsLabels = [];
+  for (let i in this.state.language) {
     let upperCaseText = i.charAt(0).toUpperCase() + i.substr(1);
 
     languageSelectorItemsLabels.push(upperCaseText)
-    this.setState({ languageSelectorItemsLabels })
+    this.setState({languageSelectorItemsLabels})
     // console.log(languageSelectorItems);
   }
 }
 
-
-  //Change language
-  changeLanguage = (language) => {
-    let currentLanguage = {...this.state.currentLanguage};
-    const updatedLanguage = {...this.state.language[language]};
-    currentLanguage = updatedLanguage;
-    this.setState({currentLanguage});
-  }
-
-  //Change first day of week
-  weekStartDay = (day) => {
-    //get a copy of state
-    let weekStart = { ...this.state.weekStart};
-    //determine what day order it is and swap the value
-    weekStart = day;
-    //update state
-    this.setState({weekStart});
-  }
-
-  //Change date order
-  dateOrderSwap = (order) => {
-    //prevent page from reloading
-    // event.preventDefault();
-    //get a copy of state
-    let dateOrder = { ...this.state.dateOrder};
-    //determine what day order it is and swap the value
-    dateOrder = order;
-    //update state
-    this.setState({dateOrder});
+//Change language
+changeLanguage = (language) => {
+  //take a copy of state
+  let currentLanguage = {
+    ...this.state.currentLanguage
   };
+  //based on the language passed into the function, find the information in state that matches the name of the language and load it into this new variable
+  const updatedLanguage = {
+    ...this.state.language[language]
+  };
+  //take the current language and set the value to the new language
+  currentLanguage = updatedLanguage;
+  //add the updated information to state
+  this.setState({currentLanguage});
+}
 
+//Change first day of week
+weekStartDay = (day) => {
+  //get a copy of state
+  let weekStart = {
+    ...this.state.weekStart
+  };
+  //determine what day order it is and swap the value
+  weekStart = day;
+  //update state
+  this.setState({weekStart});
+}
 
-  render() {
-    let currentLanguage = this.state.currentLanguage;
+//Change date order
+dateOrderSwap = (order) => {
+  //prevent page from reloading
+  // event.preventDefault();
+  //get a copy of state
+  let dateOrder = {
+    ...this.state.dateOrder
+  };
+  //determine what day order it is and swap the value
+  dateOrder = order;
+  //update state
+  this.setState({dateOrder});
+};
 
-    return (
-    <div className="container">
-      <DateContainer
-        today={this.state.today}
-        language={currentLanguage}
-        dateOrder={this.state.dateOrder}
-      />
-      <Cal
-        dateOrderSwap={this.dateOrderSwap}
-        language={currentLanguage}
-        today={this.state.today}
-        languageSelectorItems={this.state.languageSelectorItems}
-        languageSelectorItemsLabels={this.state.languageSelectorItemsLabels}
-        changeLanguage={this.changeLanguage}
-        weekStartDay={this.weekStartDay}
-        weekStart={this.state.weekStart}
-      />
-    </div>
-    )
+render() {
+  let currentLanguage = this.state.currentLanguage;
 
+  return (<div className="container">
+    <DateContainer
+      today={this.state.today}
+      language={currentLanguage}
+      dateOrder={this.state.dateOrder}
+    />
+    <Cal
+      dateOrderSwap={this.dateOrderSwap}
+      language={currentLanguage}
+      today={this.state.today}
+      languageSelectorItems={this.state.languageSelectorItems}
+      languageSelectorItemsLabels={this.state.languageSelectorItemsLabels}
+      changeLanguage={this.changeLanguage}
+      weekStartDay={this.weekStartDay}
+      weekStart={this.state.weekStart}
+    />
+  </div>)
   }
 }
 
-
 export default Calendar;
-
-// dateOrder
-// weekStart

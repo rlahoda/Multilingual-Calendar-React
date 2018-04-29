@@ -1,7 +1,7 @@
 import React from 'react';
 
 class CalDays extends React.Component {
-
+//when the props item "dayType" is passed, this checks to see what kind of day it is. A regular spacer, a spacer for the end, a normal day, a weekend, or today. Then it adds the appropriate class on the div
   render() {
     let dayTypes = 'cal__days__day';
     if (this.props.dayType === "spacer") {
