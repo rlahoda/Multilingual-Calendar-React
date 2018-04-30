@@ -2,6 +2,7 @@ import React from 'react';
 
 import DateContainer from './DateContainer';
 import Cal from './Cal';
+import CalFooter from './CalFooter';
 
 class Calendar extends React.Component {
   state = {
@@ -237,6 +238,7 @@ render() {
       weekStartDay={this.weekStartDay}
       weekStart={this.state.weekStart}
     />
+  <CalFooter/>
   </div>)
   }
 }

@@ -103,12 +103,7 @@ class CalHeader extends React.Component {
             </label>
           </div>
         </div>
-        <div className="cal__heading cal__heading--larger">
-          <p className="smallText">
-            <a href="https://github.com/rlahoda/multilingual-calendar" rel="noopener noreferrer" target="_blank">Check out the source files on Github and add more languages!</a>
-            <a href="https://github.com/rlahoda/Multilingual-Calendar-React" rel="noopener noreferrer" target="_blank">View React Version Source Files On Github</a>
-          </p>
-        </div>
+
       </div>
     </div>)
   }

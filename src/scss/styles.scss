@@ -32,7 +32,7 @@ $primary-grey: #6f6f6f;
 $light-grey: #c0c0c0;
 // Width Breakpoints
 $bp-xsmall: 600px;
-$bp-small: 780;
+$bp-small: 780px;
 $bp-med: 1060px;
 $bp-large: 1400px;
 // Height Breakpoints
@@ -234,7 +234,7 @@ h4 {
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
   order: 1;
   text-align: center;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .cal__days__spacer--end {
@@ -254,6 +254,7 @@ h4 {
 .cal__days__day--ordinal {
   visibility: hidden;
   height: 0;
+
   @include respond-at($bp-xsmall) {
     visibility: visible;
     height: auto;
@@ -334,4 +335,42 @@ h4 {
   justify-content: left;
   align-items: center;
   width: 30%;
+}
+
+.clockdate__digit--word {
+
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+
+  @include respond-at($bp-xsmall) {
+    flex-direction: row;
+  }
+  margin: 5px;
+  padding: 10px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $light-grey;
+  align-items: center;
+  width: 100%;
+  background-color: $light-grey;
+  color: white;
+  & a, a:visited {
+    color: white;
+  }
+}
+
+.footer__container {
+  width: 100%;
+  @include respond-at($bp-small) {
+    width: 45%;
+  }
+padding: 5px;
+}
+
+.footer__container--list {
+  padding-bottom: 10px;
 }
