@@ -136,7 +136,7 @@ monthDaysCalc = (month, year) => {
 componentDidMount() {
   var that = this;
   var url = 'https://raw.githubusercontent.com/rlahoda/multilingual-calendar/master/languages.json'
-
+  // var url = languages.json
   fetch(url).then(function(response) {
     if (response.status >= 400) {//if the ajax call fails, it'll send an error and add the language selector options for the basic English that's in state by default
       that.addLanguageOptions();
