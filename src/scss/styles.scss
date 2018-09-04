@@ -42,7 +42,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.25;
   color: $primary-grey;
 }
 
@@ -56,37 +56,57 @@ a:visited {
 }
 
 h1 {
-  font-size: 1.7rem;
+  font-size: 1.7em;
   &::first-letter {
     text-transform: capitalize;
   }
+  // @include respond-at($bp-med) {
+  //   font-size: 2em;
+  // }
+  // @include respond-at($bp-large) {
+  //   font-size: 4em;
+  // }
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1em;
   margin: 2px;
   &::first-letter {
     text-transform: capitalize;
   }
+  @include respond-at($bp-med) {
+    font-size: 1.5em;
+  }
+  // @include respond-at($bp-large) {
+  //   font-size: 2em;
+  // }
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 0.8em;
   &::first-letter {
     text-transform: capitalize;
   }
+  @include respond-at($bp-med) {
+    font-size: 1em;
+  }
+  // @include respond-at($bp-large) {
+  //   font-size: 1.5em;
+  // }
 }
 
 h4 {
-  font-size: 0.7rem;
+  font-size: 0.5em;
   font-weight: 600;
   &::first-letter {
     text-transform: capitalize;
   }
-}
-
-.smallText {
-  font-size: 0.7rem;
+  @include respond-at($bp-med) {
+    font-size: 0.7em;
+  }
+  // @include respond-at($bp-large) {
+  //   font-size: 1em;
+  // }
 }
 
 .text-bold {
@@ -95,12 +115,30 @@ h4 {
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  flex-wrap: wrap;
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+      "today__container"
+      "cal__container"
+      "footer";
+  }
+
   @include respond-at($bp-med) {
     min-height: 100vh;
+    flex-direction: row;
+    @supports (display: grid) {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-gap: 10px;
+      grid-template-areas:
+        "today__container cal__container"
+        "footer footer";
+    }
   }
 }
 
@@ -118,8 +156,16 @@ h4 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  @supports (display: grid) {
+    margin: 0;
+    grid-area: cal__container;
+  }
   @include respond-at($bp-med) {
     width: 60%;
+    @supports (display: grid) {
+      width: 100%;
+      margin: 0;
+    }
   }
 }
 
@@ -129,65 +175,120 @@ h4 {
   justify-content: center;
   align-items: center;
   background-color: #ededed;
+  flex-direction: column;
+  @include respond-at($bp-small) {
+    flex-direction: row;
+  }
 }
 
 .cal__heading {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 10%;
-  height: 100%;
+  width: 100%;
+  @include respond-at($bp-small) {
+    width: 25%;
+  }
   flex: 1 1 auto;
   padding: 5px;
   overflow: hidden;
-  background-color: #adadad;
-  color: white;
 }
-
-.cal__heading--inline {
-  display: inline-block;
-
-}
-
-.cal__heading--item {
-  &::first-letter {
-    text-transform: capitalize;
-}}
 
 .cal__heading__internal_container {
-  flex: 2 1 auto;
-  width: 50%;
-  justify-content: space-around;
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
+  width: 75%;
 }
 
 .cal__heading--larger {
+  flex: 2 1 auto;
   width: 100%;
+  @include respond-at($bp-small) {
+    width: 50%;
+  }
+  justify-content: space-around;
+  align-items: flex-start;
+  @supports (display: grid) {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "options options options"
+      "language weekstart dateorder";
+  }
+  @include respond-at($bp-med) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas:
+        "options language weekstart dateorder";
+
+    }
 }
 
 #languageSelectorContainer {
   padding: 0 5px;
+  grid-area: language;
+}
+
+.github-mention {
+  background-color: #edf3fe;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: blue;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 30%;
+  @supports (display: grid) {
+    grid-area: github;
+    width: 100%;
+  }
+
 }
 
 .cal__heading--box {
-  width: 100%;
   text-align: center;
+}
+.cal__heading--options {
+  grid-area: options;
+}
+
+.cal__heading--weekstart {
+  grid-area: weekstart;
+}
+
+.cal__heading--dateOrder {
+  grid-area: dateorder;
 }
 
 .cal__week {
   display: flex;
   justify-content: center;
-  padding-right: 10px;
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1em;
+  }
 }
 
 .cal__week__day {
-  margin: 10px;
+  margin: 5px;
   flex: 1 1 auto;
   width: 12%;
   display: flex;
   justify-content: center;
+  @include respond-at($bp-small) {
+    margin: 10px;
+  }
+  //grid
+  @supports (display: grid){
+    justify-self: end;
+    width: 100%;
+    @include respond-at($bp-small) {
+      justify-self: center;
+      width: auto;
+    }
+
+  }
+
+
 }
 
 .cal__week__day--text {
@@ -206,25 +307,48 @@ h4 {
 }
 
 .cal__days__grid {
+  //flexbox
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
+  //grid if supported
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    @include respond-at($bp-small) {
+      grid-gap: 1em;
+    }
+  }
+
+  height: auto;
   padding: 0.5%;
+  width: 100%;
 }
 
 .cal__days__spacer {
+  padding: auto;
   margin: 10px 1% 0 0;
   display: flex;
   flex: 1 1 auto;
-  width: 12%;
+  // width: 12%;
+  width: auto;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0);
   order: 0;
+  @supports (display: grid) {
+    // display: grid;
+    // grid-template-columns: repeat(7, 1fr);
+    // grid-gap: 5px;
+    // overflow: scroll;
+    @include respond-at($bp-small) {
+      padding: 1em;
+    }
+  }
 }
 
 .cal__days__day {
   @extend .cal__days__spacer;
   background-color: #dff8fd;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
@@ -234,7 +358,6 @@ h4 {
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
   order: 1;
   text-align: center;
-  padding: 20px 0;
 }
 
 .cal__days__spacer--end {
@@ -245,19 +368,22 @@ h4 {
 .cal__days__day--text {
   visibility: hidden;
   height: 0;
+  width: 0;
   @include respond-at($bp-xsmall) {
     visibility: visible;
     height: auto;
+    width: auto;
   }
 }
 
 .cal__days__day--ordinal {
   visibility: hidden;
   height: 0;
-
+  width: 0;
   @include respond-at($bp-xsmall) {
     visibility: visible;
     height: auto;
+    width: auto;
   }
 }
 
@@ -273,6 +399,14 @@ h4 {
 
 .cal__week__day {
   order: 1;
+}
+
+.cal__week__day--first {
+  order: 0;
+}
+
+.cal__week__day--last {
+  order: 2;
 }
 
 .today__container {
@@ -293,11 +427,19 @@ h4 {
   //   flex-direction: row;
   //   align-items: center;
   // }
+  @supports (display: grid) {
+    margin: 0;
+    grid-area: today__container;
+  }
   @include respond-at($bp-med) {
     flex-direction: column;
     width: 10%;
     flex-wrap: nowrap;
     align-items: center;
+    @supports (display: grid) {
+      width: 100%;
+      margin: 0;
+    }
   }
 }
 
@@ -326,6 +468,11 @@ h4 {
   justify-content: space-around;
   width: 80%;
   min-height: 20%;
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr 1fr 4fr;
+
+  }
 }
 
 .clockdate__digit__container {
@@ -334,16 +481,32 @@ h4 {
   display: flex;
   justify-content: left;
   align-items: center;
-  width: 30%;
 }
 
-.clockdate__digit--word {
+.clockdate__digit__container--first {
+  order: 1;
+}
 
+.clockdate__digit__container--second {
+  order: 2;
+}
+
+.clockdate__digit__container--third {
+  order: 3;
+}
+
+.clockdate__digit__container--fourth {
+  order: 4;
+}
+
+.clockdate__digit__container--fifth {
+  order: 5;
 }
 
 footer {
   display: flex;
   flex-direction: column;
+  grid-area: footer;
 
   @include respond-at($bp-xsmall) {
     flex-direction: row;

@@ -26,7 +26,7 @@ class CalHeader extends React.Component {
       </div>
       <div className="cal__heading__internal_container">
         <div className="cal__heading cal__heading--larger">
-          <div className="cal__heading--box">
+          <div className="cal__heading--box cal__heading--options">
             <h2>Options:</h2>
           </div>
           <div id="languageSelectorContainer" className="cal__heading--box">
@@ -53,7 +53,7 @@ class CalHeader extends React.Component {
               ))
             }
           </div>
-          <div className="cal__heading--box">
+          <div className="cal__heading--box cal__heading--weekstart">
             <h4>First Day of the Week:</h4>
             <label>
               <input
@@ -78,7 +78,7 @@ class CalHeader extends React.Component {
              </label>
           </div>
 
-          <div className="cal__heading--box">
+          <div className="cal__heading--box cal__heading--dateOrder">
             <h4>Date Order:</h4>
             <label>
               <input
