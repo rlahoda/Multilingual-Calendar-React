@@ -88,7 +88,13 @@ masterDate() {
   let nextYearNumber = tomorrowDate.getFullYear();
   let monthdaysAmt = this.monthDaysCalc(currentMonthNumber - 1);//the - 1 compensates back to starting the count from 0 to align with the monthDaysCalc function
   let startDayDate = new Date(thisYearNumber, currentMonthNumber, 1);
-  let startDay = startDayDate.getDay() - 2;
+  let startDay = 1;
+  if ((startDayDate.getDay() - 2 )< 1) {
+    startDay = 7 - startDayDate.getDay();
+  } else {
+    startDay = startDayDate.getDay() - 2;
+  }
+  // let startDay = startDayDate.getDay() - 2;
   //add all the values to the copy of state
   today.hour = hourValue;
   today.minute = minuteValue;
