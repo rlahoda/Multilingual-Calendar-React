@@ -9,9 +9,7 @@ class CalFooter extends React.Component {
       <footer>
         <div className="footer__container">
           <ul>
-            <li className="footer__container--list"><a href="https://rlahoda.github.io" rel="noopener noreferrer" target="_blank"><h2>Built by Rob Lahoda - View my other work</h2></a></li>
-            <li className="footer__container--list"><a href="http://www.roblahoda.com/" rel="noopener noreferrer" target="_blank">Check out my blog</a></li>
-            <li className="footer__container--list"><a href="http://www.roblahoda.com/" rel="noopener noreferrer" target="_blank">View my video and photography portfolio</a></li>
+            <li className="footer__container--list"><a href="https://roblahoda.com" rel="noopener noreferrer" target="_blank"><h2>Built by Rob Lahoda - View my other work</h2></a></li>
 
           </ul>
         </div>
